@@ -1,0 +1,12 @@
+create database jobdb;
+use jobdb;
+show databases;
+show tables;
+select * from myapp_category;
+select * from myapp_job;
+select * from myapp_studentprofile;
+delete from auth_user where id=2;
+ select * from auth_user;
+ select * from myapp_application;
+ delete from myapp_application where id=2;
+ select * from myapp_studentprofile_saved_jobs;

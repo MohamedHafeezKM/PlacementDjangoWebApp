@@ -1,0 +1,76 @@
+{% extends 'jobseeker/base.html' %}
+
+
+{%block mainblock%}
+<br> <br>
+<br> <br>
+<style>
+  body{
+    background-image: linear-gradient(-225deg, #d7d3e7 0%, #d1b9ea 29%, #ea94b1 67%, #f5f290 100%);
+    height: 120vh;
+    
+  }
+</style>
+
+{%for m in messages%}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <strong>{{m}}</strong> 
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{%endfor%}
+<div class="container">
+  <h3 class="text-center">All Jobs</h3>
+  <hr>
+ <div class="row">
+  <h6>Filter by</h6>
+      {%for cat in categories%}
+      <div class="col-3"><a href="{%url 'seeker_index'%}?category={{cat.name}}">{{cat.name}}</a>{{cat.job_set.all.count}} jobs</div>
+      {%endfor%}
+ </div>
+</div>
+   <div class="container">
+    
+  
+    <div class="row d-flex justify-content-evenly">
+        {% for job in all_jobs%}
+        <div class="card mb-3" style="max-width: 540px;">
+          <div class="row g-0">
+            <div class="col-md-4 p-2">
+              {%if job.poster%} 
+              <img src="{{job.poster.url}}" class="img-fluid rounded-start" style="height: 250px;width: 200px;" alt="...">
+              {%endif%}
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">{{job.title}}</h5>
+                <span class="card-text"><i class="fa-solid fa-business-time fa-lg me-2" style="color: #d232a7;"></i>{{job.job_type}}</span>
+                <span class="card-text"><small class="text-body-secondary"><i class="fa-solid fa-hand-holding-dollar fa-lg me-2" style="color: #d232a7;"></i>{{job.salary}}</small></span>
+                <p>{{job.created_date}}</p>
+                {%if request.user.profile%}
+                 <form action="{%url 'job_save' job.id%}" method="post">
+                   {%csrf_token%}
+                   {%if job in request.user.profile.saved_jobs.all%}
+                   <button type="submit" name="action" value="unsave" class="btn btn-outline-danger m-1"><i class="fa-solid fa-trash-can" style="color: #d232a7;"></i>Unsave</button>
+                   {%else%}
+                    <button type="submit" name="action" value="save" class="btn btn-outline-danger m-1"><i class="fa-solid fa-bookmark" style="color: #d232a7;"></i>Save</button>
+                   {%endif%}
+                   
+                 </form>
+                {%endif%}
+                <a href="{%url 'job_detail' job.id%}" class="btn btn-outline-danger m-1">View Details</a>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        {%endfor%}
+        
+    </div>
+  </div>
+
+
+
+
+
+
+{%endblock%}

@@ -1,0 +1,63 @@
+{% extends 'base.html'%}
+
+{%block mainblock%}
+<br><br><br>
+<h2 class="text-center">All Jobs</h2>
+<div class="d-flex justify-content-center mt-4 justify-content-evenly">
+   <h5>Filter by</h5>
+   <a href="{%url 'all_jobs'%}?status=True">Available Jobs</a>
+   <a href="{%url 'all_jobs'%}">List All Job</a>
+   <a href="{%url 'all_jobs'%}?status=False">Unavailabe Jobs</a>
+</div>
+{%if messages%}
+          {% for m in messages%}
+         <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>!{{m}}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+           {%endfor%}
+{%endif%}
+
+
+<div class="container">
+  
+  <div class="row">
+      {% for job in all_jobs%}
+      <div class="col-lg-3">
+          <div class="card text-bg-light" style="width: 17rem;">
+            {%if job.poster%}
+              <img src="{{job.poster.url}}" class="card-img-top" alt="..." style="width: 16.9rem; height: 300px;"></a>
+            {%endif%}
+              <div class="card-body">
+              <h5 class="card-title">{{job.title}}</h5>
+              <h6>Salary:{{job.salary}}, Last Date: {{job.last_date}}</h6>
+               <h6>Vacancy: {{job.vacancies}}</h6>
+               <h6>Contact: {{job.contact}}</h6>
+               <h6>Qualification: {{job.qualification}}</h6>
+               <h6>Category: {{job.category}}</h6>
+               <p>Is Job still available: {{job.status}}</p></p>
+               <div class="">
+                {%csrf_token%}
+                <a href="{%url 'remove_job' job.id%}" class="btn btn-outline-danger">Delete</a>
+                <a href="{%url 'change_job' job.id%}" class="btn btn-outline-danger">Edit</a>
+                <label for="">Total Applications : {{job.application_count}}</label>
+                <a href="{%url 'applications' job.id%}" class="btn btn-outline-danger">View Applications</a>
+                
+                
+          
+               </div>
+              </div>
+           </div>
+      </div>
+      {%endfor%}
+      
+  </div>
+</div>
+
+
+
+
+
+         
+
+{%endblock%}

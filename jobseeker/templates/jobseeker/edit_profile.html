@@ -1,0 +1,64 @@
+{% extends 'jobseeker/base.html' %}
+
+
+{%block mainblock%}
+<br> <br>
+<br> <br>
+
+{%if form.errors%}
+  {{form.errors}}
+{%endif%}
+<div class="container">
+    <form action="" method="post" enctype="multipart/form-data" class="border border p-4">
+        {%csrf_token%}
+        <div class="row">
+            <h2 class="text-center fw-light">Edit Profile</h2>
+                <hr>
+            <div class="col-lg-6 col-12 text-danger">
+                
+                <label for="">Qualification:</label>
+                <input type="text" name="qualification" value="{{form.qualification.value}}"  class="form-control">
+                <label for="">Skills:</label>
+                <textarea name="skills"  class="form-control" rows="2">{{form.skills.value}}</textarea>
+                <label for="">Age:</label>
+                <input type="number" value="{{form.age.value}}" name="age"  class="form-control">
+                <label for="">Experience:</label>
+                <input type="number" name="experience" value="{{form.age.value}}"  class="form-control">
+                <label for="">Gender:</label>
+                {{form.gender}}
+                
+                    
+                  
+            </div>
+            <div class="col-lg-6 col-12 text-danger">
+                <label for="">Address:</label>
+                <textarea name="address"  class="form-control" rows="2">{{form.address.value}}</textarea>
+                <label for="">Phone:</label>
+                <input type="number" name="phone" value="{{form.phone.value}}"  class="form-control">
+                <label for="">Resume:</label>
+                <input type="file" name="resume"  class="form-control">
+                <h6><a href="{{form.resume.value.url}}">{{form.resume.value}}</a></h6>
+                <label for="">Profile Pic:</label>
+                <input type="file" name="profile_pic"  class="form-control">
+                {%if form.profile_pic.value%}
+                <h6><a href="{{form.profile_pic.value.url}}">{{form.profile_pic.value}}</a></h6>
+                {%endif%}
+                    
+                  
+    
+                
+            </div>
+          
+        </div>
+        <div class="row">
+            <div class="col-12 mt-4">
+                <div class="d-grid gap-2"><button class="btn btn-outline-danger" type="submit">Edit</button></div>
+            </div>
+        </div>
+    </form>
+
+
+
+
+
+{%endblock%}

@@ -1,0 +1,46 @@
+{%extends 'base.html'%}
+
+{%block mainblock%}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <form action="" method="post">
+                {%csrf_token%}
+                <br><br><br>
+                <div class="mt-5 d-flex text-danger">
+                    <input type="text" name="name" placeholder="Type new category" class="form-control">
+                    <button class="btn btn-outline-danger" type="submit">Add</button>
+                    {%for m in messages%}
+                       {{m}}
+                    {%endfor%}
+                </div>
+            </form>
+            <h2 class="text-center mt-2">All Categories</h2>
+            <table class="table table-dark mt-5">
+                <tr>
+                    <th class="text-danger text-center">Category Name</th>
+                     <th class="text-danger">Action</th>
+                </tr>
+
+                {%for c in all_category%}
+                <tr>
+                    <td class="text-danger text-center">{{c}}</td>
+                    <td><a class="text-danger" href="{%url 'category-delete' c.id%}"><i class="fa-solid fa-trash" style="color: #db1d0f;"></i></a></td>
+                </tr>
+
+                {%endfor%}
+
+    
+            </table>
+
+
+
+
+        </div>
+        
+    </div>
+</div>
+
+
+{%endblock%}

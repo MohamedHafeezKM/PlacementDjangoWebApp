@@ -1,0 +1,70 @@
+{% extends 'jobseeker/base.html' %}
+
+
+{%block mainblock%}
+<br> <br>
+<br> <br>
+<style>
+    .card-colour{
+      background-image: linear-gradient(-225deg, #a48ef3 0%, #836c9c 29%, #e89bb5 67%, #e8e7c0 100%);
+      
+      
+    }
+  </style>
+
+<div class="container">
+    <div class="row">
+        <div class="row d-flex justify-content-evenly">
+           <div class="card card-colour mb-3" style="max-width: 100vw;">
+              <div class="row g-0">
+                <div class="col-md-4 p-2">
+                  {%if job.poster%} 
+                  <img src="{{job.poster.url}}" class="img-fluid border border-2 rounded-start" style="height: 400px;width: 350px;" alt="...">
+                  {%endif%}
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">{{job.title}}</h5>
+                    <hr>
+                    <span class="card-text"><i class="fa-solid fa-business-time fa-lg me-2" style="color: #d232a7;"></i>{{job.job_type}}</span>
+                    <span class="card-text"><small class="text-body-secondary"><i class="fa-solid fa-hand-holding-dollar fa-lg me-2" style="color: #d232a7;"></i>{{job.salary}}</small></span>
+                    <p>{{job.created_date}}</p>
+                    <hr>
+                     <label for="" class="fst-italic me-1">Descritpion:</label><span>{{job.description}}</span>
+                     <div>
+                        <label for="" class="fst-italic me-1">Experience:</label><span>{{job.experience}}</span>
+                     </div>
+                     <div>
+                        <label for="" class="fst-italic me-1">Last date to apply: </label><span>{{job.last_date}}</span>
+                     </div>
+                     <div>
+                        <label for="" class="fst-italic me-1">Vacancy: </label><span>{{job.vacancies}}</span>
+                     </div>
+                     <div>
+                        <label for="" class="fst-italic me-1">Contact: </label><span>{{job.contact}}</span>
+                     </div>
+                     <div>
+                        <label for="" class="fst-italic me-1">Job Available: </label><span>{{job.status}}</span>
+                     </div>
+                     <div class="mb-4">
+                        <label for="" class="fst-italic me-1">Company: </label><span>{{job.company}}</span>
+                        <hr>
+                     </div>
+                     <form action="{%url 'apply_job' job.id %}" method="post">
+                        {%csrf_token%}
+                        <button type="submit">Apply Now</button>
+                     </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+            
+        </div>
+
+    </div>
+</div>
+
+
+
+{%endblock%}

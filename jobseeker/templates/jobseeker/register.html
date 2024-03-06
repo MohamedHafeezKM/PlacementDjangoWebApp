@@ -1,0 +1,41 @@
+{% extends 'jobseeker/base.html' %}
+
+
+{%block mainblock%}
+<br> <br>
+<br> <br>
+{%if form.errors%}
+
+{{form.errors}}
+
+{%endif%}
+<div class="container">
+    <form action="" method="post">
+        <h2 class="text-center fw-light">Register</h2>
+        <hr>
+        {%csrf_token%}
+        <div class="col-12 text-danger">
+                
+            <label for="">Username:</label>
+            <input type="text" name="username"  class="form-control">
+            <label for="">Email:</label>
+            <input type="email" name="email"  class="form-control">
+            <label for="">Name:</label>
+            <input type="text" name="first_name"  class="form-control">
+            <label for="">Password:</label>
+            <input type="password" name="password1"  class="form-control">
+            <label for="">Confirm Password:</label>
+            <input type="password" name="password2"  class="form-control">
+            
+            
+            
+        <div class="row">
+            <div class="col-12 mt-4">
+                <div class="d-grid gap-2"><button class="btn btn-outline-danger" type="submit">Add</button></div>
+            </div>
+        </div>
+    </form>
+</div>               
+
+
+{%endblock%}

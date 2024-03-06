@@ -1,0 +1,59 @@
+{% extends 'base.html'%}
+
+{%block mainblock%}
+<br><br><br>
+
+<h2 class="text-center">Student Details</h2>
+<hr>
+<div class="container d-flex justify-content-center">
+    <div class="card mb-3 bg-dark text-danger" style="max-width: 720px;">
+       <div class="row g-5">
+         <div class="col-md-5">
+          {%if data.student.profile.profile_pic%}
+            <img src="{{data.student.profile.profile_pic.url}}" alt="k" style="width: 250px; height: 340px;">
+          {%else%}
+           {%load static%}
+           <img src="{%static 'jobseeker/images/noimage.jpg'%}" alt="k" style="width: 250px; height: 340px;">
+          {%endif%}
+         </div>
+         <div class="col-md-7">
+           <div class="card-body">
+             <h5 class="card-title">{{data.student}}</h5>
+             <p class="card-text">{{data.student.profile.qualification}}</p>
+             <p class="card-text"><h6>Skills: {{data.student.profile.skills}}</h6>
+                <h6>Age:{{data.student.profile.age}}</h6>
+                <h6>Gender: {{data.student.profile.gender}}</h6>
+                <h6>Contact: {{data.student.profile.phone}}</h6>
+                <h6>Address: {{data.student.profile.address}}</h6>
+                <h6>Email: {{data.student.email}}</h6>
+                <h6>Experience: {{data.student.profile.experience}}</h6>
+                {%if data.student.profile.resume%}
+                  <a href="{{data.student.profile.resume.url}}" download class="btn btn-outline-danger">Download CV</a>
+                {%endif%}
+
+                <form class="mt-2" action="{%url 'application_status_edit' data.id%}" method="post">
+                    {%csrf_token%}
+                    <label for="">Select Status:</label>
+                    <select class="form-select bg-danger mb-2" name="status" id="">
+                        <option value="rejected">Rejected</option>
+                        <option value="processing">Processing</option>
+                        <option value="shortlisted">Shortlisted</option>
+                    </select>
+                    <button class="btn btn-outline-danger" type="submit">Save</button>
+                    {%for m in messages%}
+                       {{m}}
+                    {%endfor%}
+                </form>
+
+                
+         </div>
+       </div>
+     </div>
+
+
+
+
+
+
+
+{%endblock%}

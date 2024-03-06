@@ -1,0 +1,50 @@
+{% extends 'jobseeker/base.html' %}
+
+
+{%block mainblock%}
+<br> <br>
+<br> <br>
+<style>
+  body{
+    background-image: linear-gradient(-225deg, #231557 0%, #44107A 29%, #FF1361 67%, #FFF800 100%);
+    height: 100vh;
+    
+  }
+</style>
+
+<div class="container d-flex justify-content-center">
+    <div class="card mb-3 bg-dark text-danger" style="max-width: 720px;">
+       <div class="row g-5">
+         <div class="col-md-5">
+          {%if data.profile_pic%}
+            <img src="{{data.profile_pic.url}}" alt="k" style="width: 250px; height: 340px;">
+          {%else%}
+           {%load static%}
+           <img src="{%static 'jobseeker/images/noimage.jpg'%}" alt="k" style="width: 250px; height: 340px;">
+          {%endif%}
+         </div>
+         <div class="col-md-7">
+           <div class="card-body">
+             <h5 class="card-title">{{data.user}}</h5>
+             <p class="card-text">{{data.qualification}}</p>
+             <p class="card-text"><h6>Skills: {{data.skills}}</h6>
+                <h6>Age:{{data.age}}</h6>
+                <h6>Gender: {{data.gender}}</h6>
+                <h6>Contact: {{data.phone}}</h6>
+                <h6>Address: {{data.address}}</h6>
+                <h6>Email: {{data.user.email}}</h6>
+                <h6>Experience: {{data.experience}}</h6>
+                {%if data.resume%}
+                  <a href="{{data.resume.url}}" download class=" btn btn-outline-danger">Download CV</a>
+                {%endif%}
+
+                
+         </div>
+       </div>
+     </div>
+
+
+
+
+
+{%endblock%}

@@ -1,0 +1,51 @@
+{% extends 'jobseeker/base.html' %}
+
+
+{%block mainblock%}
+<br> <br>
+<br> <br>
+<style>
+  body{
+    background-image: linear-gradient(-225deg, #231557 0%, #44107A 29%, #FF1361 67%, #FFF800 100%);
+    height: 120vh;
+    
+  }
+</style>
+
+{%for m in messages%}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <strong>{{m}}</strong> 
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{%endfor%}
+
+<div class="container">
+    <div class="row">
+    {%for a in application%}
+    <div class="card me-2" style="width: 18rem;">
+        {%if a.job.poster%}
+        <img src="{{a.job.poster.url}}" class="card-img-top" width="100px" height="200px" alt="...">
+        {%endif%}
+        <div class="card-body">
+          <h5 class="card-title">{{a.job.title}}</h5>
+          <p class="card-text">{{a.job.company}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Vacancy: {{a.job.vacancies}}</li>
+          <li class="list-group-item">Applied date: {{a.applied_date}}</li>
+          <li class="list-group-item">Status: {{a.status}}</li>
+        </ul>
+        <div class="card-body">
+          <p>{{a.job.application_count}} Applied</p>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+      </div>
+    {%endfor%}
+    </div>
+</div>
+
+
+
+
+
+{%endblock%}

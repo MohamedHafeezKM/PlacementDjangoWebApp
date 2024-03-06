@@ -1,0 +1,17 @@
+{% extends 'base.html'%}
+
+{%block mainblock%}
+   {%for m in messages%}
+      {{m}}
+   {%endfor%}
+  <div class="container mt-5">
+    <div class="row">
+      <div class="d-flex justify-content-evenly position-absolute top-50 start-50 translate-middle">
+        <a href="{%url 'category'%}" class="btn btn-dark w-25 text-danger">Category</a>
+        <a href="{%url 'all_jobs'%}" class="btn btn-dark w-25 text-danger">Jobs</a>
+        <a href="{%url 'all_applications'%}" class="btn btn-dark w-25 text-danger">Applications</a>
+    </div>
+    </div>
+  </div>
+
+{%endblock%}
